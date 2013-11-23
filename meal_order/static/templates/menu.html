@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+	{% block content %}
+		{% ifequal status 1 %}
+		<div>
+			<label>Please add you like:</label>
+		</div>
+		{% endifequal %}
+		<div>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					{% ifequal status 1 %}
+					<th>Ordered</th>
+					{% endifequal %}
+				</tr>
+				{% for menu_info in menu_info_list %}
+					<tr>
+						<td>{{menu_info.name}}</td>
+						<td>
+							{{menu_info.price}}
+						</td>
+						{% ifequal status 1 %}
+						<td>
+							<a href="#" id="dish_{{menu_info.id}}" onclick="dish_crud({{menu_info.id}},'{{menu_info.name}}',{{menu_info.price}})">add</a>						
+						</td>
+						{% endifequal %}	
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+		<div id="show_order" style="{% ifequal status 1 %}display:none;{% endifequal %}">
+			{% ifequal status 1 %}
+			Selected:
+			<table id="order_table">
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+				</tr>
+			</table>
+			{% endifequal %}
+			Total:&nbsp;<span id="total_cost" style="color:red;">{% ifnotequal status 1 %}{{cost}}{% endifnotequal %}</span>
+		</div>
+		<div id="submit_div" style="display:none;">
+			<input type="hidden" id="id_csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+			<button id="submit_bill" onclick="submit_bill();">Submit order</button>
+		</div>
+		<script type="text/javascript">
+			var meal_id_list = Array();
+		</script>
+	{% endblock %}

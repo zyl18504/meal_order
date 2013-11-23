@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+	{% block content %}
+		<div>
+			<label>Please select a restaurant:</label>
+		</div>
+		<div>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Average</th>
+					<th>Ordered</th>
+				</tr>
+				{% for menu_info in menu_info_list %}
+					<tr>
+						<td></td>
+						<td>
+							{{menu_info.name}}
+						</td>
+						<td>
+							<form action="order">{% csrf_token %}
+								<input type="hidden" name="restaurant_id" value="{{menu_info.id}}">
+								<input type="submit" value="Order">
+							</form>
+						</td>	
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	{% endblock %}

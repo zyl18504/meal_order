@@ -1,0 +1,23 @@
+<html>
+<head>
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/module.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/resolve_csrf.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/main.js"></script>
+	<title>Hungry? Order now!</title>
+</head>
+<body>
+	{% block content %}
+	Welcome, {{user_info.email}}
+	<form action="order">
+		<input type="submit" value="Order now!">
+	</form>
+	<form action="bill">
+		<input type="submit" value="Check Bills">
+	</form>
+	<div id="restaurant_list">
+				
+	</div>
+	{% endblock %}
+</body>
+</html>

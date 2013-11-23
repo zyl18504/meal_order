@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+	{% block content %}
+		<h3>Ordered</h3>
+		{% for item in item_list %}
+			<div>
+				<form action="">
+					<table>
+						<tr>
+							<td>{{item.time|date:"d/m/Y H:i"}}</td>
+							<td><input type="hidden" name="bill_id" value="{{item.id}}"></td>
+							<td><input type="submit" value="Check"></td>
+						</tr>	
+					</table>
+				</form>
+			</div>
+		{% endfor %}
+	{% endblock %}

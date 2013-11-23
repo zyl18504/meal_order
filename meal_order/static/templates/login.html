@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title>Meal Order</title>
+</head>
+<body>
+Hungry? Order now!
+<form action="" method="post">{% csrf_token %}
+	<div>
+        <label for="">User name</label>
+        <input type="text" name="email" id="email"/>
+	</div>
+    <div>
+        <label for="">Password</label>
+        <input type="password" name="password" id="password"/>
+    </div>
+    <div>
+        <input type="submit" value="Sign in"/>
+    </div>
+</form>
+</body>
+</html>
