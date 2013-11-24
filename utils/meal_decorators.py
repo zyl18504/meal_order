@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from meal_order.models import Token
+from meal_order.models import Token,User
 
 __author__ = 'allen.zhang'
 
@@ -12,7 +12,7 @@ def user_required(func):
         token_obj = Token.objects.filter(token_string=token)
         if token_obj:
             token_obj = token_obj[0]
-            user = token_obj.user
+            user = User.objects.get(id=token_obj.user_id)
             request.user = user
             return func(request, *args, **kwargs)
         return HttpResponseRedirect(reverse("login"))

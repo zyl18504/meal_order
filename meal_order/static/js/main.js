@@ -32,7 +32,7 @@ function submit_bill(){
 		select_meal +='meal_id='+meal_id_list[i];
 		
 	}
-	select_meal+="&cost="+parseInt($("#total_cost").html());
+	select_meal+="&cost="+parseInt($("#total_cost").html()) + "&restaurant_id=" + $("#restaurant_id").val();
 	$.ajax({
 		url:"order",
 		type:"post",

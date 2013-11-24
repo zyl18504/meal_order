@@ -1,5 +1,9 @@
 #encoding=utf8
 
+from mongoengine import connect
+connect("meal")
+
+
 user_dict = {
 	'allen@conversant.com.cn':'123123'
 }
@@ -56,7 +60,7 @@ for u in user_dict.keys():
 
 
 
-#init Restaurant data
+# #init Restaurant data
 for res in restaurant_list:
      r = Restaurant()
      r.name = res
@@ -65,7 +69,7 @@ for res in restaurant_list:
 
 
 
-# #init category data
+# # #init category data
 for category in category_list:
     ca = Category()
     ca.name = category
@@ -80,8 +84,9 @@ for res_name in menu_dict.keys():
         new_menu = Food()
         new_menu.name = menu['name']
         new_menu.price = menu['price']
-        new_menu.category = Category.objects.get(name=menu['category'])
-        new_menu.restaurant = Restaurant.objects.get(name=res_name)
+        # print 'id:%s,type:%s' %(str(Category.objects.get(name=menu['category']).id),type(str(Category.objects.get(name=menu['category']).id)))
+        new_menu.category_id = str(Category.objects.get(name=menu['category']).id)
+        new_menu.restaurant_id = str(Restaurant.objects.get(name=res_name).id)
         new_menu.number = 0
         new_menu.save()
 

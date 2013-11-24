@@ -14,6 +14,7 @@
 					<th>Ordered</th>
 					{% endifequal %}
 				</tr>
+				<input type="hidden" id="restaurant_id" value="{{restaurant_id}}">
 				{% for menu_info in menu_info_list %}
 					<tr>
 						<td>{{menu_info.name}}</td>
@@ -22,7 +23,7 @@
 						</td>
 						{% ifequal status 1 %}
 						<td>
-							<a href="#" id="dish_{{menu_info.id}}" onclick="dish_crud({{menu_info.id}},'{{menu_info.name}}',{{menu_info.price}})">add</a>						
+							<a href="#" id="dish_{{menu_info.id}}" onclick="dish_crud('{{menu_info.id}}','{{menu_info.name}}',{{menu_info.price}})">add</a>						
 						</td>
 						{% endifequal %}	
 					</tr>
