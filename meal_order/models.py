@@ -6,7 +6,7 @@ from mongoengine.fields import *
 import datetime as dt
 
 class User(Document):
-    email = StringField(unique=True)
+    email = EmailField(unique=True)
     password = StringField(max_length=255)
 
 
@@ -16,6 +16,7 @@ class Token(Document):
 
 class Restaurant(Document):
     name = StringField(max_length=255)
+    admin = EmailField()
     number = IntField()
 
 class Category(Document):

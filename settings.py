@@ -104,6 +104,7 @@ ROOT_URLCONF = 'meal.urls'
 
 
 SESSION_ENGINE = 'mongoengine.django.sessions'
+SESSION_COOKIE_AGE = 86400
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".

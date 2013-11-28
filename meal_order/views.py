@@ -8,10 +8,14 @@ from utils.meal_decorators import  *
 from models import *
 import datetime
 from mongoengine import connect
+import redis,json
 connect("meal")
 
 __author__ = 'allen.zhang'
 
+
+redis_pool = redis.ConnectionPool(host="localhost",port=6379,db=0)
+redis_obj = redis.Redis(connection_pool=redis_pool)
 
 class MealOrderBaseView(TemplateView):
     @method_decorator(user_required)
@@ -69,6 +73,7 @@ class OrderView(MealOrderBaseView):
         return self.render_to_response(c)
 
     def post(self,*args,**kwargs):
+
         meal_id_list = self.request.POST.getlist("meal_id")
         restaurant_id = self.request.POST.get("restaurant_id")
         cost = self.request.POST.get("cost")
@@ -84,10 +89,13 @@ class OrderView(MealOrderBaseView):
         for meal_id in meal_id_list:
             food = Food.objects.get(id=meal_id)
             food_id_list.append(str(food.id))
+            food.number = food.number + 1
+            food.save()
             History(user_id=str(self.request.user.id),name=food.name,cost=food.price).save()
         new_bill.food_id_list = food_id_list
         new_bill.cost = cost
         new_bill.save()
+        redis_obj.rpush("bill_queue",json.dumps({restaurant_id:meal_id_list}))
         return HttpResponse("ok",status=200)
 
 

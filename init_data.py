@@ -9,7 +9,7 @@ user_dict = {
 }
 
 
-restaurant_list = [u'餐厅A',u'餐厅B',u'餐厅C',u'餐厅D',u'餐厅E',u'餐厅F',u'餐厅G',u'餐厅H',u'餐厅I',u'餐厅J',u'餐厅K']
+restaurant_list = [{'name':u'餐厅A','admin':'allen@conversnat.com.cn'},{'name':u'餐厅B','admin':'allen@conversnat.com.cn'},{'name':u'餐厅C','admin':'allen@conversnat.com.cn'},{'name':u'餐厅D','admin':'allen@conversnat.com.cn'}]
 
 category_list = [u'凉菜',u'热菜',u'主食',u'酒水饮料']
 
@@ -63,7 +63,8 @@ for u in user_dict.keys():
 # #init Restaurant data
 for res in restaurant_list:
      r = Restaurant()
-     r.name = res
+     r.name = res['name']
+     r.admin = res['admin']
      r.number = 0
      r.save()
 
