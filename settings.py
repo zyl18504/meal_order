@@ -105,6 +105,7 @@ ROOT_URLCONF = 'meal.urls'
 
 SESSION_ENGINE = 'mongoengine.django.sessions'
 SESSION_COOKIE_AGE = 86400
+TASK_RUN_FREQUENCY = 1
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -139,7 +140,7 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
     },
     'loggers': {
         'django.request': {
@@ -154,3 +155,8 @@ LOGGING = {
 
 FOOD_ORDER_STATUS=1
 ORDER_CHECK_STATUS=2
+
+
+EMAIL_HOST='smtp.exmail.qq.com'
+EMAIL_HOST_USER = 'yulong@conversant.com.cn'
+EMAIL_HOST_PASSWORD = 'zyl18504qm'

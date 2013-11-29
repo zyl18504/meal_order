@@ -9,6 +9,7 @@ from models import *
 import datetime
 from mongoengine import connect
 import redis,json
+from meal_task.operations import *
 connect("meal")
 
 __author__ = 'allen.zhang'
@@ -96,6 +97,7 @@ class OrderView(MealOrderBaseView):
         new_bill.cost = cost
         new_bill.save()
         redis_obj.rpush("bill_queue",json.dumps({restaurant_id:meal_id_list}))
+        bill_send_operation()
         return HttpResponse("ok",status=200)
 
 
