@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from meal_order.views import *
 from meal_task.base import *
-# bill_task.do_job()
+bill_task.execute()
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin

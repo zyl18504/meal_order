@@ -97,7 +97,7 @@ class OrderView(MealOrderBaseView):
         new_bill.cost = cost
         new_bill.save()
         redis_obj.rpush("bill_queue",json.dumps({restaurant_id:meal_id_list}))
-        bill_send_operation()
+        # bill_send_operation()
         return HttpResponse("ok",status=200)
 
 
