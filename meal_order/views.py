@@ -9,7 +9,6 @@ from models import *
 import datetime
 from mongoengine import connect
 import redis,json
-from meal_task.operations import *
 connect("meal")
 
 __author__ = 'allen.zhang'
@@ -52,9 +51,11 @@ class UserInfoView(MealOrderBaseView):
     template_name = "index.html"
     def get(self, request, *args, **kwargs):
         c = self.get_context_data(**kwargs)
-        user_info = User.objects.filter(id=request.user.id).select_related()
+        user_info = request.user
+        # if user_info:
         c['user_info'] = user_info
         return self.render_to_response(c)
+        # return HttpResponseRedirect(reverse("login"))
 
 
 class OrderView(MealOrderBaseView):

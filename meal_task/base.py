@@ -15,7 +15,6 @@ task_run_frequency = settings.TASK_RUN_FREQUENCY
 
 redis_pool = redis.ConnectionPool(host="localhost",port=6379,db=0)
 redis_obj = redis.Redis(connection_pool=redis_pool)
-# from signals import cron_done
 
 
 class Task(object):
@@ -53,11 +52,8 @@ class BillSendJob(Job):
             meal_id_list = bill_info[restaurant_id]
             meal_name = ','.join([food.name for food in Food.objects.filter(id__in=meal_id_list)])
             send_mail('You receive a bill', meal_name, 'yulong@conversant.com.cn',['%s' % restaurant.admin], fail_silently=False)
-            # Timer(task_run_frequency,bill_send_operation()).start()
         except:
             pass
-            # cron_done.send(sender=self)
-            # Timer(task_run_frequency,bill_send_operation()).start()
 
 bill_task = Task()
 bill_task.register(BillSendJob)
